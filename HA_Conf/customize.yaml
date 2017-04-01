@@ -1,0 +1,4 @@
+  switch.saloon_light:
+    icon: mdi:lightbulb
+  switch.tv_set:
+    icon: mdi:television

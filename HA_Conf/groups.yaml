@@ -1,0 +1,80 @@
+  default_view:
+    view: yes
+    entities:
+      - sensor.read_315mhz2
+      - sensor.read_315mhz3
+      - light.portch_light
+      - light.living_room_main_rgb
+      - group.kitchen
+      - group.living_room
+      - group.bedroom
+      - switch.tv_set
+      - switch.saloon_light
+      - sensor.cpu_temperature
+      - camera.lab
+      - sensor.kitchen_humidity
+      - sensor.kitchen_temperature
+      - script.send_mqtt_message
+      - sensor.kitchen_motion
+      - camera.living_room_foscam
+      - camera.living_room_2
+      - input_boolean.kitchen_room_already_turned_on
+      - sensor.read_ir
+      - sensor.bedroom_humidity
+      - sensor.bedroom_motion
+      - sensor.bedroom_temperature
+      - light.bedroom_light
+      - light.office_light_rgb
+      - light.lab_light
+      - sensor.living_room_motion
+
+#### Views
+ 
+  kitchen_view:
+    view: yes
+    name: Kitchen
+    entities:
+      - group.kitchen
+
+  living_room_view:
+    view: yes
+    name: Living Room
+    entities:
+      - group.living_room
+
+  bedroom_view:
+    view: yes
+    name: Bedroom
+    entities:
+      - group.bedroom
+
+#### Groups
+
+  kitchen:
+    name: Kitchen
+    entities:
+      - camera.kitchen
+      - sensor.kitchen_humidity
+      - sensor.kitchen_temperature
+
+
+  living_room:
+    name: Living Room
+    entities:
+      - camera.living_room
+      - switch.saloon_light
+      - switch.tv_set
+      - camera.living_room_foscam
+      - light.lab_light
+      - light.portch_light
+      - light.living_room_main_rgb
+      - sensor.living_room_motion
+
+  bedroom:
+    name: bedroom
+    entities:
+      - sensor.bedroom_humidity
+      - sensor.bedroom_motion
+      - sensor.bedroom_temperature
+      - light.bedroom_light
+

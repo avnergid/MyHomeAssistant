@@ -1,0 +1,42 @@
+- platform: mqtt
+  name: "Office Light RGB"
+  command_topic: "sensor/ir_led_strip"
+  brightness_command_topic: "sensor/ir_led_strip"
+  rgb_command_topic: "sensor/ir_led_strip"
+  brightness_value_template: "{{ value_json.brightness }}"
+  rgb_value_template: "{{ value_json.rgb | join(',') }}"
+  qos: 0
+  payload_on: "0xFF02FD"
+  payload_off: "0xFF02FD"
+  optimistic: true
+
+- platform: mqtt
+  name: "Living Room Main RGB"
+  command_topic: "sensor3/ir_led_strip"
+  brightness_command_topic: "sensor3/ir_led_strip"
+  rgb_command_topic: "sensor3/ir_led_strip"
+  brightness_value_template: "{{ value_json.brightness }}"
+  rgb_value_template: "{{ value_json.rgb | join(',') }}"
+  qos: 0
+  payload_on: "0xFFA25D"
+  payload_off: "0xFFE21D"
+  optimistic: true
+
+- platform: mqtt
+  name: Portch Light
+  command_topic: "sensor3/send_rc"
+  #payload_on: "12627475;327"
+  payload_on: "7900243;321"
+  payload_off: "7900247;321"
+
+- platform: mqtt
+  name: Lab Light
+  command_topic: "sensor3/send_rc"
+  payload_on: "15988344;193"
+  payload_off: "15988344;193"
+
+- platform: mqtt
+  name: bedroom_light
+  command_topic: "sensor2/send_rc"
+  payload_on: "12176657;297"
+  payload_off: "12176658;297"

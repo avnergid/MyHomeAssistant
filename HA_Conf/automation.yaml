@@ -1,0 +1,73 @@
+- alias: New IR Code received
+  trigger:
+    - platform: mqtt
+      topic: "sensor/ir_read"
+    - platform: mqtt
+      topic: "sensor2/ir_read"
+  action:
+    service: persistent_notification.create
+    data_template:
+      message: "{{ trigger.payload }}"
+      title: "IR Received"
+
+- alias: New RC Code received
+  trigger:
+    - platform: mqtt
+      topic: "sensor/rc_read"
+    - platform: mqtt
+      topic: "sensor2/rc_read"
+  action:
+    service: persistent_notification.create
+    data_template:
+      message: "{{ trigger.payload }}"
+      title: "RC Received"
+
+
+# Automation: When there is motion in the living room, activate a script to turn on the lights (shown next)
+- alias: Turn on kitchen room lights when there is movement
+  trigger:
+    - platform: state
+      entity_id: sensor.kitchen_motion
+      to: '1'
+  condition:
+    - condition: state
+      entity_id: input_boolean.kitchen_room_already_turned_on
+      state: 'off'
+    - condition: state
+      entity_id: script.timed_lamp_on
+      state: 'off'
+  action:
+    service: homeassistant.turn_on
+    entity_id: script.timed_lamp_on
+   
+
+- alias: turn_light_off_after_10_min_still_motion
+  trigger:
+    platform: event
+    event_type: start_counting_kitchen_light_loop
+  condition:
+    - condition: state
+      entity_id: sensor.kitchen_motion
+      state: '1'
+    - condition: state
+      entity_id: input_boolean.kitchen_room_already_turned_on
+      state: 'on'
+  action:
+    service: homeassistant.turn_on
+    entity_id: script.timed_lamp_on_loop
+
+- alias: turn_light_off_after_10_min_no_motion
+  trigger:
+    platform: event
+    event_type: start_counting_kitchen_light_loop
+  condition:
+    - condition: state
+      entity_id: sensor.kitchen_motion
+      state: '0'
+    - condition: state
+      entity_id: input_boolean.kitchen_room_already_turned_on
+      state: 'on'
+  action:
+    service: homeassistant.turn_on
+    entity_id: script.timed_lamp_off
+

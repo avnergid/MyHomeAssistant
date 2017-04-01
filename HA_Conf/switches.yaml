@@ -1,0 +1,24 @@
+- platform: command_line
+  switches:
+    saloon_light:
+      command_on: ' python3 /home/pi/orbivopy/orvibo.py -i 192.168.1.108 -m ACCF237E2C00 -x irda -e /home/pi/orbivopy/light_on.ir'
+      command_off: ' python3 /home/pi/orbivopy/orvibo.py -i 192.168.1.108 -m ACCF237E2C00 -x irda -e /home/pi/orbivopy/light_off.ir'
+      friendly_name: 'Living Room Light'
+    tv_set:
+      command_on: ' python3 /home/pi/orbivopy/orvibo.py -i 192.168.1.108 -m ACCF237E2C00 -x irda -e /home/pi/orbivopy/tv_on.ir'
+      command_off: ' python3 /home/pi/orbivopy/orvibo.py -i 192.168.1.108 -m ACCF237E2C00 -x irda -e /home/pi/orbivopy/tv_on.ir'
+      friendly_name: 'TV Set'
+
+- platform: mqtt
+  name: bedroom_light
+  command_topic: "sensor2/send_rc"
+  payload_on: "12176657"
+  payload_off: "12176658"
+  retain: true
+
+- platform: mqtt
+  name: fortch_light
+  command_topic: "sensor2/send_rc"
+  payload_on: "12627475"
+  payload_off: "12627476"
+  retain: true

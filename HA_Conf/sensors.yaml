@@ -1,0 +1,70 @@
+- platform: command_line
+  name: CPU Temperature
+  command: "cat /sys/class/thermal/thermal_zone0/temp"
+  unit_of_measurement: "°C"
+  value_template: '{{ value | multiply(0.001) }}'
+
+- platform: mqtt
+  name: "Kitchen Temperature"
+  state_topic: "sensor/temperature"
+  qos: 0
+  unit_of_measurement: "ºC"
+
+- platform: mqtt
+  name: "Kitchen Humidity"
+  state_topic: "sensor/humidity"
+  qos: 0
+  unit_of_measurement: "%"
+
+- platform: mqtt
+  name: "Bedroom Temperature"
+  state_topic: "sensor2/temperature"
+  qos: 0
+  unit_of_measurement: "ºC"
+
+- platform: mqtt
+  name: "Bedroom Humidity"
+  state_topic: "sensor2/humidity"
+  qos: 0
+  unit_of_measurement: "%"
+
+- platform: mqtt
+  name: "LED Strip IR CMD"
+  state_topic: "sensor/ir_led_strip"
+
+- platform: mqtt
+  state_topic: "sensor/motion"
+  name: "Kitchen Motion"
+  qos: 0
+  payload_on: "1"
+  payload_off: "0"
+  device_class: motion
+
+- platform: mqtt
+  state_topic: "sensor2/motion"
+  name: "Bedroom Motion"
+  qos: 0
+  payload_on: "1"
+  payload_off: "0"
+  device_class: motion
+
+- platform: mqtt
+  state_topic: "sensor3/motion"
+  name: "Living Room Motion"
+  qos: 0
+  payload_on: "1"
+  payload_off: "0"
+  device_class: motion
+
+- platform: mqtt
+  state_topic: "sensor2/ir_recv"
+  name: "Read IR"
+
+- platform: mqtt
+  state_topic: "sensor2/rc_read"
+  name: "Read 315Mhz-2"
+
+- platform: mqtt
+  state_topic: "sensor3/rc_read"
+  name: "Read 315Mhz-3"
+  
